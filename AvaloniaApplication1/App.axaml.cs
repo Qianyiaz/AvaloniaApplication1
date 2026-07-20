@@ -17,11 +17,11 @@ public class App : Application
 
         using var sp = new AppServiceProvider();
         
-        var mv = sp.GetService<MainWindow>();
-        mv.DataContext = sp.GetService<MainWindowViewModel>();
+        var mw = sp.GetService<MainWindow>();
+        mw.DataContext = sp.GetService<MainWindowViewModel>();
 
-        sp.GetService<INavigateView>().Target = mv.Control; 
+        sp.GetService<INavigateView>().Target = mw.Control; 
 
-        desktop.MainWindow = mv;
+        desktop.MainWindow = mw;
     }
 }

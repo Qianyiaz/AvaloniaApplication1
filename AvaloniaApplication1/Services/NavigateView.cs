@@ -1,5 +1,4 @@
 ﻿using Avalonia.Controls;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace AvaloniaApplication1.Services;
 
@@ -10,8 +9,8 @@ public class NavigateView(IServiceProvider sp) : INavigateView
     {
         Target.Content = id switch
         {
-            1 => sp.GetService<HomePage>(),
-            2 => sp.GetService<SettingsPage>(),
+            1 => sp.GetService(typeof (HomePage)),
+            2 => sp.GetService(typeof (SettingsPage)),
             _ => throw new ArgumentOutOfRangeException(nameof(id), id, null)
         };
     }
