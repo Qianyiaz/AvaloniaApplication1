@@ -6,7 +6,6 @@
     <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
 
     <Application.Styles>
-        <StyleInclude Source="Controls/RadioButton.axaml" />
         <mst:MaterialTheme BaseTheme="Inherit" PrimaryColor="DeepPurple" SecondaryColor="Blue" />
     </Application.Styles>
 </Application>

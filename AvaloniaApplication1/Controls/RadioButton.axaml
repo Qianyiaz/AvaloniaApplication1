@@ -22,5 +22,9 @@
                               IsChecked="{TemplateBinding IsChecked, Mode=TwoWay}" />
             </ControlTemplate>
         </Setter>
+        
+        <Style Selector="^:checked /template/ ToggleButton#Button">
+            <Setter Property="IsHitTestVisible" Value="False" />
+        </Style>
     </Style>
 </Styles>

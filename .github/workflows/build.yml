@@ -1,0 +1,36 @@
+name: build
+permissions:
+  contents: read
+on:
+  push:
+    branches:
+      - main
+    paths: [ 'AvaloniaApplication1/**', '**/build.yml' ]
+jobs:
+  publish:
+    strategy:
+      matrix:
+        include:
+          - platform: windows-latest
+            runtime: win-x64
+    runs-on: ${{ matrix.platform }}
+    steps:
+      - uses: actions/checkout@main
+        with:
+          sparse-checkout: |
+            .github
+            AvaloniaApplication1
+            AvaloniaApplication1.slnx
+      - uses: actions/cache@main
+        with:
+          path: ~/.nuget/packages
+          key: nuget-cache-${{ matrix.runtime }}
+      - run: dotnet publish -r ${{ matrix.runtime }}
+      - uses: actions/upload-artifact@main
+        with:
+          name: Release-${{ matrix.runtime }}
+          path: |
+            **/publish
+            !**/*.pdb
+            !**/*.dbg
+            !**/*.dSYM

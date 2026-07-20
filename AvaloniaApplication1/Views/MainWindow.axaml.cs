@@ -10,10 +10,6 @@ namespace AvaloniaApplication1;
 
 public partial class MainWindow : Window
 {
-    private readonly UserControl _homeView = new HomePage();
-
-    private readonly UserControl _settingsView = new SettingsPage();
-
     public MainWindow() => InitializeComponent();
 
     protected override async void OnLoaded(RoutedEventArgs e)
@@ -30,7 +26,7 @@ public partial class MainWindow : Window
         RenderTransform = transformGroup;
         Opacity = 0;
 
-        var fadeIn = new Animation
+        await Task.WhenAll(new Animation
         {
             Duration = TimeSpan.FromSeconds(0.45),
             FillMode = FillMode.Forward,
@@ -40,9 +36,7 @@ public partial class MainWindow : Window
                 new KeyFrame { Cue = new Cue(1d), Setters = { new Setter(OpacityProperty, 1d) } }
             },
             Easing = new SineEaseOut()
-        };
-
-        var slideIn = new Animation
+        }.RunAsync(this), new Animation
         {
             Duration = TimeSpan.FromSeconds(0.6),
             FillMode = FillMode.Forward,
@@ -52,9 +46,7 @@ public partial class MainWindow : Window
                 new KeyFrame { Cue = new Cue(1d), Setters = { new Setter(TranslateTransform.XProperty, 0d) } }
             },
             Easing = new BackEaseOut()
-        };
-
-        var scaleIn = new Animation
+        }.RunAsync(this), new Animation
         {
             Duration = TimeSpan.FromSeconds(0.6),
             FillMode = FillMode.Forward,
@@ -80,20 +72,6 @@ public partial class MainWindow : Window
                 }
             },
             Easing = new BackEaseOut()
-        };
-
-        await Task.WhenAll(fadeIn.RunAsync(this), slideIn.RunAsync(this), scaleIn.RunAsync(this));
-
-        Control.Content = _homeView;
-    }
-
-    private void OnNavigateClick(object? sender, RoutedEventArgs e)
-    {
-        Control.Content = (sender as RadioButton) switch
-        {
-            { Content: "Home" } => _homeView,
-            { Content: "Settings" } => _settingsView,
-            _ => null
-        };
+        }.RunAsync(this));
     }
 }
