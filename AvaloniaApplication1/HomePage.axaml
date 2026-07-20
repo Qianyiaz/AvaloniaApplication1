@@ -1,0 +1,32 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="AvaloniaApplication1.HomePage">
+    <StackPanel HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Spacing="16"
+                Margin="30"
+                Width="400">
+        <TextBlock Text="欢迎回来"
+                   FontSize="28"
+                   FontWeight="Bold"
+                   Foreground="{DynamicResource MaterialPrimaryForegroundBrush}" />
+
+        <TextBlock Text="请登录或注册以继续"
+                   FontSize="14"
+                   Opacity="0.7" />
+
+        <TextBox PlaceholderText="用户名"
+                 Classes="outline" />
+
+        <TextBox PlaceholderText="密码"
+                 PasswordChar="*"
+                 Classes="outline" />
+
+        <Button Content="登录"
+                Classes="accent"
+                Height="40"
+                Margin="0 8 0 0" />
+
+        <HyperlinkButton HorizontalAlignment="Right" Content="没有账号? 注册" />
+    </StackPanel>
+</UserControl>

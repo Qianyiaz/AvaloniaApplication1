@@ -1,0 +1,11 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="AvaloniaApplication1.SettingsPage">
+    <ComboBox Theme="{StaticResource MaterialOutlineComboBox}">
+        <ComboBox.Items>
+            <x:String>Light</x:String>
+            <x:String>Dark</x:String>
+            <x:String>System</x:String>
+        </ComboBox.Items>
+    </ComboBox>
+</UserControl>

@@ -1,0 +1,51 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="AvaloniaApplication1.MainWindow"
+        xmlns:ui="using:Material.Styles.Controls"
+        TransparencyLevelHint="Mica,AcrylicBlur,None"
+        Background="Transparent"
+        Title="AvaloniaApplication1">
+    <Grid RowDefinitions="*,Auto">
+        <ui:Card Margin="15 15 15 0">
+            <ui:Card.Background>
+                <LinearGradientBrush Opacity="0.6" StartPoint="0%,0%" EndPoint="100%,0%">
+                    <GradientStop Color="#667eea" Offset="0.0" />
+                    <GradientStop Color="#764ba2" Offset="1.0" />
+                </LinearGradientBrush>
+            </ui:Card.Background>
+            <TransitioningContentControl Name="Control">
+                <TransitioningContentControl.PageTransition>
+                    <CompositePageTransition>
+                        <PageSlide Duration="0:00:00.4"
+                                   Orientation="Horizontal"
+                                   SlideInEasing="CubicEaseOut"
+                                   SlideOutEasing="CubicEaseIn" />
+                        <CrossFade Duration="0:00:00.35"
+                                   FadeInEasing="SineEaseOut"
+                                   FadeOutEasing="SineEaseIn" />
+                    </CompositePageTransition>
+                </TransitioningContentControl.PageTransition>
+            </TransitioningContentControl>
+        </ui:Card>
+
+        <ui:Card Margin="15" Grid.Row="1">
+            <ui:Card.Background>
+                <LinearGradientBrush Opacity="0.6" StartPoint="0%,0%" EndPoint="100%,0%">
+                    <GradientStop Color="#7c4dff" Offset="0.0" />
+                    <GradientStop Color="#2979ff" Offset="1.0" />
+                </LinearGradientBrush>
+            </ui:Card.Background>
+            <Panel>
+                <StackPanel Margin="15 0 0 0" VerticalAlignment="Center" Spacing="10" Orientation="Horizontal">
+                    <RadioButton IsChecked="True" Click="OnNavigateClick">Home</RadioButton>
+                    <RadioButton Click="OnNavigateClick">Settings</RadioButton>
+                </StackPanel>
+
+                <Button Content="Click Me"
+                        Classes="accent"
+                        HorizontalAlignment="Right"
+                        FontSize="20" Padding="25 14 25 14" CornerRadius="9" />
+            </Panel>
+        </ui:Card>
+    </Grid>
+</Window>

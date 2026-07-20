@@ -1,0 +1,9 @@
+**/bin/
+**/obj/
+*.*.user
+.idea/
+.vs/
+.vscode/
+.DS_Store
+Thumbs.db
+desktop.ini
