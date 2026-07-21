@@ -17,10 +17,9 @@ public class App : Application
 
         using var sp = new AppServiceProvider();
 
-        var mw = sp.GetService<MainWindow>();
-        mw.DataContext = sp.GetService<MainWindowViewModel>();
+        var mw = new MainWindow { DataContext = sp.GetService<MainWindowViewModel>() };
 
-        sp.GetService<INavigateView>().Target = mw.Control;
+        sp.GetService<INavigateView>().SetTarget(mw.Control);
 
         desktop.MainWindow = mw;
     }

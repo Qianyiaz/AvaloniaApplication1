@@ -1,17 +1,16 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        x:Class="AvaloniaApplication1.MainWindow"
-        x:DataType="vm:MainWindowViewModel"
         xmlns:ui="using:Material.Styles.Controls"
         xmlns:vm="using:AvaloniaApplication1.ViewModels"
+        x:Class="AvaloniaApplication1.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
         TransparencyLevelHint="Mica,AcrylicBlur,None"
         Background="Transparent"
         Title="AvaloniaApplication1">
     <Interaction.Behaviors>
-        <EventTriggerBehavior EventName="Loaded">
-            <InvokeCommandAction CommandParameter="1"
-                                 Command="{Binding NavigateCommand}" />
-        </EventTriggerBehavior>
+        <ControlLoadedEventCommandTrigger
+            Command="{Binding NavigateCommand}"
+            Parameter="1" />
     </Interaction.Behaviors>
 
     <Window.Styles>
@@ -66,22 +65,19 @@
             </ui:Card.Background>
             <Panel>
                 <StackPanel Margin="15 0 0 0" VerticalAlignment="Center" Spacing="10" Orientation="Horizontal">
-                    <RadioButton IsChecked="True"
-                                 Content="Home">
+                    <RadioButton IsChecked="True" Content="Home">
                         <Interaction.Behaviors>
-                            <EventTriggerBehavior EventName="Click">
-                                <InvokeCommandAction CommandParameter="1"
-                                                     Command="{Binding NavigateCommand}" />
-                            </EventTriggerBehavior>
+                            <ButtonClickEventCommandTrigger
+                                Command="{Binding NavigateCommand}"
+                                Parameter="1" />
                         </Interaction.Behaviors>
                     </RadioButton>
 
                     <RadioButton Content="Settings">
                         <Interaction.Behaviors>
-                            <EventTriggerBehavior EventName="Click">
-                                <InvokeCommandAction CommandParameter="2"
-                                                     Command="{Binding NavigateCommand}" />
-                            </EventTriggerBehavior>
+                            <ButtonClickEventCommandTrigger
+                                Command="{Binding NavigateCommand}"
+                                Parameter="2" />
                         </Interaction.Behaviors>
                     </RadioButton>
                 </StackPanel>

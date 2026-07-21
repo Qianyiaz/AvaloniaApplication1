@@ -1,22 +1,25 @@
 ﻿using Avalonia.Controls;
+using AvaloniaApplication1.ViewModels;
 
 namespace AvaloniaApplication1.Services;
 
-public class NavigateView(IServiceProvider sp) : INavigateView
+public class NavigateView : INavigateView
 {
-    public ContentControl Target { get; set; } = null!;
+    private ContentControl _target = null!;
 
-    public void Navigate(int id) => Target.Content = id switch
+    public void SetTarget(ContentControl control) => _target = control;
+
+    public void Navigate(int id) => _target.Content = id switch
     {
-        1 => sp.GetService(typeof(HomePage)),
-        2 => sp.GetService(typeof(SettingsPage)),
+        1 => new HomePage(),
+        2 => new SettingsPage { DataContext = new SettingsPageViewModel() },
         _ => throw new ArgumentOutOfRangeException(nameof(id), id, null)
     };
 }
 
 public interface INavigateView
 {
-    ContentControl Target { get; set; }
+    void SetTarget(ContentControl control);
 
     void Navigate(int id);
 }
