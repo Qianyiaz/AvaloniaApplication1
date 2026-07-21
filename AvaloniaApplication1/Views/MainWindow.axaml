@@ -9,11 +9,8 @@
         Title="AvaloniaApplication1">
     <Interaction.Behaviors>
         <EventTriggerBehavior EventName="Loaded">
-            <AsyncActionGroup Mode="Sequence">
-                <DelayAction Duration="0:0:1" />
-                <InvokeCommandAction CommandParameter="1"
-                                     Command="{Binding NavigateCommand}" />
-            </AsyncActionGroup>
+            <InvokeCommandAction CommandParameter="1"
+                                 Command="{Binding NavigateCommand}" />
         </EventTriggerBehavior>
     </Interaction.Behaviors>
 
@@ -52,7 +49,7 @@
                                    Orientation="Horizontal"
                                    SlideInEasing="CubicEaseOut"
                                    SlideOutEasing="CubicEaseIn" />
-                        <CrossFade Duration="0:00:00.35"
+                        <CrossFade Duration="0:00:00.25"
                                    FadeInEasing="SineEaseOut"
                                    FadeOutEasing="SineEaseIn" />
                     </CompositePageTransition>

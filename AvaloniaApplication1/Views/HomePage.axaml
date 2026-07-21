@@ -6,27 +6,28 @@
                 Spacing="16"
                 Margin="30"
                 Width="400">
-        <TextBlock Text="欢迎回来"
+        <TextBlock Text="Welcome HERE BACK!"
                    FontSize="28"
                    FontWeight="Bold"
                    Foreground="{DynamicResource MaterialPrimaryForegroundBrush}" />
 
-        <TextBlock Text="请登录或注册以继续"
+        <TextBlock Text="Please Login or Register to continue."
                    FontSize="14"
-                   Opacity="0.7" />
+                   Opacity="0.7"
+                   FontWeight="Light" />
 
-        <TextBox PlaceholderText="用户名"
+        <TextBox PlaceholderText="Username"
                  Classes="outline" />
 
-        <TextBox PlaceholderText="密码"
+        <TextBox PlaceholderText="Password"
                  PasswordChar="*"
                  Classes="outline" />
 
-        <Button Content="登录"
+        <Button Content="Login"
                 Classes="accent"
                 Height="40"
                 Margin="0 8 0 0" />
 
-        <HyperlinkButton HorizontalAlignment="Right" Content="没有账号? 注册" />
+        <HyperlinkButton HorizontalAlignment="Right" Content="Don't have an account? Register Now!" />
     </StackPanel>
 </UserControl>

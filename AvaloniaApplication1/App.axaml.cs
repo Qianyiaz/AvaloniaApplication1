@@ -9,18 +9,18 @@ namespace AvaloniaApplication1;
 public class App : Application
 {
     public override void Initialize() => AvaloniaXamlLoader.Load(this);
-    
+
     public override void OnFrameworkInitializationCompleted()
     {
         if (ApplicationLifetime is not IClassicDesktopStyleApplicationLifetime desktop)
             return;
 
         using var sp = new AppServiceProvider();
-        
+
         var mw = sp.GetService<MainWindow>();
         mw.DataContext = sp.GetService<MainWindowViewModel>();
 
-        sp.GetService<INavigateView>().Target = mw.Control; 
+        sp.GetService<INavigateView>().Target = mw.Control;
 
         desktop.MainWindow = mw;
     }

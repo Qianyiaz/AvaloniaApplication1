@@ -7,5 +7,5 @@ namespace AvaloniaApplication1.ViewModels;
 public partial class MainWindowViewModel(INavigateView nv) : ObservableObject
 {
     [RelayCommand]
-    private void Navigate(string tag) => nv.Navigate(int.Parse(tag));
+    private void Navigate(string id) => nv.Navigate(int.Parse(id));
 }

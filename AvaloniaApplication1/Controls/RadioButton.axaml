@@ -11,7 +11,7 @@
     </Design.PreviewWith>
 
     <Style Selector="RadioButton">
-        <Setter Property="Padding" Value="20 8" />
+        <Setter Property="Padding" Value="21 8" />
         <Setter Property="CornerRadius" Value="35" />
         <Setter Property="Template">
             <ControlTemplate TargetType="RadioButton">
@@ -22,7 +22,7 @@
                               IsChecked="{TemplateBinding IsChecked, Mode=TwoWay}" />
             </ControlTemplate>
         </Setter>
-        
+
         <Style Selector="^:checked /template/ ToggleButton#Button">
             <Setter Property="IsHitTestVisible" Value="False" />
         </Style>
