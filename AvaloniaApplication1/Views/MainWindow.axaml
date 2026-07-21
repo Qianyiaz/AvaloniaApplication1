@@ -9,8 +9,8 @@
         Title="AvaloniaApplication1">
     <Interaction.Behaviors>
         <EventTriggerBehavior EventName="Loaded">
-            <AsyncActionGroup>
-                <DelayAction Duration="0:0:0.6" />
+            <AsyncActionGroup Mode="Sequence">
+                <DelayAction Duration="0:0:1" />
                 <InvokeCommandAction CommandParameter="1"
                                      Command="{Binding NavigateCommand}" />
             </AsyncActionGroup>
@@ -19,6 +19,22 @@
 
     <Window.Styles>
         <StyleInclude Source="/Controls/RadioButton.axaml" />
+
+        <Style Selector="Window">
+            <Setter Property="Opacity" Value="0" />
+            <Setter Property="RenderTransform" Value="translate(150px,0px) scale(0.85)" />
+            <Setter Property="Transitions">
+                <Transitions>
+                    <DoubleTransition Property="Opacity" Easing="SineEaseOut" Duration="0:0:0.65" />
+                    <TransformOperationsTransition Property="RenderTransform" Easing="BackEaseOut" Duration="0:0:0.8" />
+                </Transitions>
+            </Setter>
+
+            <Style Selector="^[IsVisible=True]">
+                <Setter Property="Opacity" Value="1" />
+                <Setter Property="RenderTransform" Value="translate(0px,0px) scale(1)" />
+            </Style>
+        </Style>
     </Window.Styles>
 
     <Grid RowDefinitions="*,Auto">
