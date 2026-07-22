@@ -5,5 +5,5 @@ namespace AvaloniaApplication1.Services;
 
 [ServiceProvider]
 [Singleton<MainWindowViewModel>]
-[Singleton<INavigateView, NavigateView>]
+[Singleton<INavigationService, NavigationService>]
 public partial class AppServiceProvider;

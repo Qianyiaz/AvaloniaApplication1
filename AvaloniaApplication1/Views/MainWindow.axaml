@@ -1,20 +1,29 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:ui="using:Material.Styles.Controls"
+        xmlns:mia="using:Material.Icons.Avalonia"
         xmlns:vm="using:AvaloniaApplication1.ViewModels"
-        x:Class="AvaloniaApplication1.MainWindow"
+        xmlns:cvt="using:AvaloniaApplication1.Converters"
+        xmlns:views="using:AvaloniaApplication1.Views"
+        x:Class="AvaloniaApplication1.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         TransparencyLevelHint="Mica,AcrylicBlur,None"
         Background="Transparent"
         Title="AvaloniaApplication1">
-    <Interaction.Behaviors>
-        <ControlLoadedEventCommandTrigger
-            Command="{Binding NavigateCommand}"
-            Parameter="1" />
-    </Interaction.Behaviors>
+
+    <Window.Resources>
+        <cvt:RadioButtonCheckedConverter x:Key="RadioButtonCheckedConverter" />
+    </Window.Resources>
 
     <Window.Styles>
-        <StyleInclude Source="/Controls/RadioButton.axaml" />
+        <Style Selector="ToggleButton">
+            <Setter Property="Padding" Value="21 8" />
+            <Setter Property="CornerRadius" Value="35" />
+
+            <Style Selector="^:checked">
+                <Setter Property="IsHitTestVisible" Value="False" />
+            </Style>
+        </Style>
 
         <Style Selector="Window">
             <Setter Property="Opacity" Value="0" />
@@ -41,19 +50,37 @@
                     <GradientStop Color="#764ba2" Offset="1.0" />
                 </LinearGradientBrush>
             </ui:Card.Background>
-            <TransitioningContentControl Name="Control">
-                <TransitioningContentControl.PageTransition>
-                    <CompositePageTransition>
-                        <PageSlide Duration="0:00:00.4"
-                                   Orientation="Horizontal"
-                                   SlideInEasing="CubicEaseOut"
-                                   SlideOutEasing="CubicEaseIn" />
-                        <CrossFade Duration="0:00:00.25"
-                                   FadeInEasing="SineEaseOut"
-                                   FadeOutEasing="SineEaseIn" />
-                    </CompositePageTransition>
-                </TransitioningContentControl.PageTransition>
-            </TransitioningContentControl>
+            <Panel>
+                <ui:FloatingButton IsEnabled="{Binding Nav.IsCanGoBack}"
+                                   Command="{Binding GoBackCommand}"
+                                   Content="{mia:MaterialIconExt Kind=ArrowBack}"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Top"
+                                   FontSize="21"
+                                   Padding="5" />
+
+                <TransitioningContentControl Content="{Binding CurrentPage}">
+                    <TransitioningContentControl.DataTemplates>
+                        <DataTemplate DataType="vm:HomePageViewModel">
+                            <views:HomePage />
+                        </DataTemplate>
+                        <DataTemplate DataType="vm:SettingsPageViewModel">
+                            <views:SettingsPage />
+                        </DataTemplate>
+                    </TransitioningContentControl.DataTemplates>
+                    <TransitioningContentControl.PageTransition>
+                        <CompositePageTransition>
+                            <PageSlide Duration="0:00:00.4"
+                                       Orientation="Horizontal"
+                                       SlideInEasing="CubicEaseOut"
+                                       SlideOutEasing="CubicEaseIn" />
+                            <CrossFade Duration="0:00:00.25"
+                                       FadeInEasing="SineEaseOut"
+                                       FadeOutEasing="SineEaseIn" />
+                        </CompositePageTransition>
+                    </TransitioningContentControl.PageTransition>
+                </TransitioningContentControl>
+            </Panel>
         </ui:Card>
 
         <ui:Card Margin="15" Grid.Row="1">
@@ -65,21 +92,23 @@
             </ui:Card.Background>
             <Panel>
                 <StackPanel Margin="15 0 0 0" VerticalAlignment="Center" Spacing="10" Orientation="Horizontal">
-                    <RadioButton IsChecked="True" Content="Home">
+                    <ToggleButton Content="Home"
+                                  IsChecked="{Binding Nav.CurrentPageId, Converter={StaticResource RadioButtonCheckedConverter}, ConverterParameter=0}">
+                        <Interaction.Behaviors>
+                            <ButtonClickEventCommandTrigger
+                                Command="{Binding NavigateCommand}"
+                                Parameter="0" />
+                        </Interaction.Behaviors>
+                    </ToggleButton>
+
+                    <ToggleButton Content="Settings"
+                                  IsChecked="{Binding Nav.CurrentPageId, Converter={StaticResource RadioButtonCheckedConverter}, ConverterParameter=1}">
                         <Interaction.Behaviors>
                             <ButtonClickEventCommandTrigger
                                 Command="{Binding NavigateCommand}"
                                 Parameter="1" />
                         </Interaction.Behaviors>
-                    </RadioButton>
-
-                    <RadioButton Content="Settings">
-                        <Interaction.Behaviors>
-                            <ButtonClickEventCommandTrigger
-                                Command="{Binding NavigateCommand}"
-                                Parameter="2" />
-                        </Interaction.Behaviors>
-                    </RadioButton>
+                    </ToggleButton>
                 </StackPanel>
 
                 <Button Content="Click Me"

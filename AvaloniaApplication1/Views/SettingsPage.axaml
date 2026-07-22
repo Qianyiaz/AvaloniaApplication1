@@ -2,7 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:vm="using:AvaloniaApplication1.ViewModels"
              x:DataType="vm:SettingsPageViewModel"
-             x:Class="AvaloniaApplication1.SettingsPage">
+             x:Class="AvaloniaApplication1.Views.SettingsPage">
     <ComboBox PlaceholderText="Set the App Theme."
               SelectedValue="{Binding SelectedTheme}"
               Theme="{StaticResource MaterialOutlineComboBox}">
