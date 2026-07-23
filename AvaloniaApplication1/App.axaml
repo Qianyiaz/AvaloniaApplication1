@@ -8,6 +8,6 @@
 
     <Application.Styles>
         <mia:MaterialIconStyles />
-        <mst:MaterialTheme BaseTheme="Inherit" PrimaryColor="DeepPurple" SecondaryColor="Blue" />
+        <mst:MaterialTheme PrimaryColor="DeepPurple" SecondaryColor="Blue" />
     </Application.Styles>
 </Application>

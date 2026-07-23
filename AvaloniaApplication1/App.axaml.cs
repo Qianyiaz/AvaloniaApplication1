@@ -13,10 +13,8 @@ public class App : Application
 
     public override void OnFrameworkInitializationCompleted()
     {
-        if (ApplicationLifetime is not IClassicDesktopStyleApplicationLifetime desktop)
-            return;
-
         using var sp = new AppServiceProvider();
-        desktop.MainWindow = new MainWindow { DataContext = sp.GetService<MainWindowViewModel>() };
+        if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+            desktop.MainWindow = new MainWindow { DataContext = sp.GetService<MainWindowViewModel>() };
     }
 }

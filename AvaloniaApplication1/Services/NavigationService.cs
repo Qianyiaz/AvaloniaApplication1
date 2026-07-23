@@ -1,12 +1,8 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-
-namespace AvaloniaApplication1.Services;
+﻿namespace AvaloniaApplication1.Services;
 
 public interface INavigationService
 {
-    int CurrentPageId { get; }
-
-    bool IsCanGoBack { get; }
+    bool CanGoBack { get; }
 
     event Action<int>? Navigated;
 
@@ -15,37 +11,28 @@ public interface INavigationService
     void GoBack();
 }
 
-public partial class NavigationService : ObservableObject, INavigationService
+public class NavigationService : INavigationService
 {
-    private readonly Stack<int> _backStack = new();
+    private readonly Stack<int> _navigationStack = new();
 
-    [ObservableProperty] public partial int CurrentPageId { get; private set; } = -1;
-
-    public bool IsCanGoBack => _backStack.Count > 0;
+    public bool CanGoBack => _navigationStack.Count > 1;
 
     public event Action<int>? Navigated;
 
     public void Navigate(int pageId)
     {
-        if (pageId == CurrentPageId)
+        if (_navigationStack.Count > 0 && _navigationStack.Peek() == pageId)
             return;
 
-        if (CurrentPageId >= 0)
-            _backStack.Push(CurrentPageId);
-
-        ShowPage(pageId);
+        _navigationStack.Push(pageId);
+        Navigated?.Invoke(pageId);
     }
 
     public void GoBack()
     {
-        if (IsCanGoBack)
-            ShowPage(_backStack.Pop());
-    }
+        if (!CanGoBack) return;
 
-    private void ShowPage(int pageId)
-    {
-        CurrentPageId = pageId;
-        Navigated?.Invoke(pageId);
-        OnPropertyChanged(nameof(IsCanGoBack));
+        _navigationStack.Pop();
+        Navigated?.Invoke(_navigationStack.Peek());
     }
 }

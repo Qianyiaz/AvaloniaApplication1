@@ -6,13 +6,17 @@ namespace AvaloniaApplication1.ViewModels;
 
 public partial class MainWindowViewModel : ObservableObject
 {
-    [ObservableProperty] private object? _currentPage;
-
+    private readonly INavigationService _nav;
+    
     public MainWindowViewModel(INavigationService nav)
     {
-        Nav = nav;
-        Nav.Navigated += id =>
+        _nav = nav;
+        
+        _nav.Navigated +=  id =>
         {
+            SelectedPageId = id;
+            IsCanGoBack = nav.CanGoBack;
+
             CurrentPage = id switch
             {
                 0 => new HomePageViewModel(),
@@ -20,14 +24,18 @@ public partial class MainWindowViewModel : ObservableObject
                 _ => null
             };
         };
-        Nav.Navigate(0);
+        
+        _nav.Navigate(0);
     }
+    
+    [ObservableProperty] private object? _currentPage;
 
-    public INavigationService Nav { get; }
+    [ObservableProperty] private int _selectedPageId;
 
+    partial void OnSelectedPageIdChanged(int value) => _nav.Navigate(value);
+
+    [ObservableProperty] private bool _isCanGoBack;
+    
     [RelayCommand]
-    private void Navigate(string id) => Nav.Navigate(int.Parse(id));
-
-    [RelayCommand]
-    private void GoBack() => Nav.GoBack();
+    private void GoBack() => _nav.GoBack();
 }
