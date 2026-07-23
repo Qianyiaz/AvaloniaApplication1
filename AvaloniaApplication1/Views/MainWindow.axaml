@@ -42,23 +42,14 @@
         </Style>
     </Window.Styles>
 
-    <Grid RowDefinitions="*,Auto">
-        <ui:Card Margin="15 15 15 0">
+    <Grid Margin="8" RowDefinitions="*,Auto">
+        <ui:Card Margin=" 0 0 0 8">
             <ui:Card.Background>
                 <LinearGradientBrush Opacity="0.6" StartPoint="0%,0%" EndPoint="100%,0%">
                     <GradientStop Color="#667eea" Offset="0.0" />
                     <GradientStop Color="#764ba2" Offset="1.0" />
                 </LinearGradientBrush>
             </ui:Card.Background>
-            <Panel>
-                <ui:FloatingButton IsEnabled="{Binding Nav.IsCanGoBack}"
-                                   Command="{Binding GoBackCommand}"
-                                   Content="{mia:MaterialIconExt Kind=ArrowBack}"
-                                   HorizontalAlignment="Left"
-                                   VerticalAlignment="Top"
-                                   FontSize="21"
-                                   Padding="5" />
-
                 <TransitioningContentControl Content="{Binding CurrentPage}">
                     <TransitioningContentControl.DataTemplates>
                         <DataTemplate DataType="vm:HomePageViewModel">
@@ -80,10 +71,9 @@
                         </CompositePageTransition>
                     </TransitioningContentControl.PageTransition>
                 </TransitioningContentControl>
-            </Panel>
         </ui:Card>
 
-        <ui:Card Margin="15" Grid.Row="1">
+        <ui:Card Padding="15 8" Grid.Row="1">
             <ui:Card.Background>
                 <LinearGradientBrush Opacity="0.6" StartPoint="0%,0%" EndPoint="100%,0%">
                     <GradientStop Color="#7c4dff" Offset="0.0" />
@@ -91,7 +81,7 @@
                 </LinearGradientBrush>
             </ui:Card.Background>
             <Panel>
-                <StackPanel Margin="15 0 0 0" VerticalAlignment="Center" Spacing="10" Orientation="Horizontal">
+                <StackPanel VerticalAlignment="Center" Spacing="15" Orientation="Horizontal">
                     <ToggleButton Content="Home"
                                   IsChecked="{Binding Nav.CurrentPageId, Converter={StaticResource RadioButtonCheckedConverter}, ConverterParameter=0}">
                         <Interaction.Behaviors>
@@ -111,10 +101,11 @@
                     </ToggleButton>
                 </StackPanel>
 
-                <Button Content="Click Me"
-                        Classes="accent"
-                        HorizontalAlignment="Right"
-                        FontSize="20" Padding="25 14 25 14" CornerRadius="9" />
+                <ui:FloatingButton IsEnabled="{Binding Nav.IsCanGoBack}"
+                                   Command="{Binding GoBackCommand}"
+                                   Content="{mia:MaterialIconExt Kind=ArrowBack}"
+                                   HorizontalAlignment="Right"
+                                   FontSize="21"/>
             </Panel>
         </ui:Card>
     </Grid>
