@@ -10,20 +10,19 @@
         TransparencyLevelHint="Mica,AcrylicBlur,None"
         Background="Transparent"
         Title="AvaloniaApplication1">
-    
+
     <Window.Resources>
         <cvt:RadioButtonCheckedConverter x:Key="RadioButtonCheckedConverter" />
     </Window.Resources>
 
     <Window.Styles>
         <Style Selector="RadioButton">
-            <Setter Property="Padding" Value="21 8" />
-            <Setter Property="CornerRadius" Value="35" />
+            <Setter Property="Padding" Value="22 8" />
+            <Setter Property="CornerRadius" Value="40" />
 
             <Setter Property="Template">
                 <ControlTemplate TargetType="RadioButton">
-                    <ToggleButton Name="Button"
-                                  Padding="{TemplateBinding Padding}"
+                    <ToggleButton Padding="{TemplateBinding Padding}"
                                   Content="{TemplateBinding Content}"
                                   CornerRadius="{TemplateBinding CornerRadius}"
                                   IsChecked="{TemplateBinding IsChecked, Mode=TwoWay}" />
@@ -52,15 +51,9 @@
         </Style>
     </Window.Styles>
 
-    <Grid Margin="8" RowDefinitions="*,Auto">
-        <ui:Card Margin=" 0 0 0 8">
-            <ui:Card.Background>
-                <LinearGradientBrush Opacity="0.6" StartPoint="0%,0%" EndPoint="100%,0%">
-                    <GradientStop Color="#667eea" Offset="0.0" />
-                    <GradientStop Color="#764ba2" Offset="1.0" />
-                </LinearGradientBrush>
-            </ui:Card.Background>
-            <TransitioningContentControl Content="{Binding CurrentPage}">
+    <Panel>
+        <Grid Margin="15 10" RowDefinitions="*,Auto">
+            <TransitioningContentControl Margin=" 0 0 0 8" Content="{Binding CurrentPage}">
                 <TransitioningContentControl.DataTemplates>
                     <DataTemplate DataType="vm:HomePageViewModel">
                         <views:HomePage />
@@ -81,30 +74,23 @@
                     </CompositePageTransition>
                 </TransitioningContentControl.PageTransition>
             </TransitioningContentControl>
-        </ui:Card>
 
-        <ui:Card Padding="15 8" Grid.Row="1">
-            <ui:Card.Background>
-                <LinearGradientBrush Opacity="0.6" StartPoint="0%,0%" EndPoint="100%,0%">
-                    <GradientStop Color="#7c4dff" Offset="0.0" />
-                    <GradientStop Color="#2979ff" Offset="1.0" />
-                </LinearGradientBrush>
-            </ui:Card.Background>
-            <Panel>
-                <StackPanel VerticalAlignment="Center" Spacing="15" Orientation="Horizontal">
-                    <RadioButton Content="Home"
-                                 IsChecked="{Binding SelectedPageId, Converter={StaticResource RadioButtonCheckedConverter}, ConverterParameter=0}" />
+            <ui:FloatingButton Grid.Row="1"
+                               IsEnabled="{Binding IsCanGoBack}"
+                               Command="{Binding GoBackCommand}"
+                               Content="{mia:MaterialIconExt Kind=ArrowBack}"
+                               HorizontalAlignment="Right"
+                               FontSize="21" />
 
-                    <RadioButton Content="Settings"
-                                 IsChecked="{Binding SelectedPageId, Converter={StaticResource RadioButtonCheckedConverter}, ConverterParameter=1}" />
-                </StackPanel>
+            <StackPanel Grid.Row="1" VerticalAlignment="Center" Spacing="15" Orientation="Horizontal">
+                <RadioButton Content="Home"
+                             IsChecked="{Binding SelectedPageId, Converter={StaticResource RadioButtonCheckedConverter}, ConverterParameter=0}" />
 
-                <ui:FloatingButton IsEnabled="{Binding IsCanGoBack}"
-                                   Command="{Binding GoBackCommand}"
-                                   Content="{mia:MaterialIconExt Kind=ArrowBack}"
-                                   HorizontalAlignment="Right"
-                                   FontSize="21" />
-            </Panel>
-        </ui:Card>
-    </Grid>
+                <RadioButton Content="Settings"
+                             IsChecked="{Binding SelectedPageId, Converter={StaticResource RadioButtonCheckedConverter}, ConverterParameter=1}" />
+            </StackPanel>
+        </Grid>
+        
+        <WindowNotificationManager Name="NotificationManager" MaxItems="3" />
+    </Panel>
 </Window>
