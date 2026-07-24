@@ -1,11 +1,9 @@
-﻿using CommunityToolkit.Mvvm.Messaging;
-
-namespace AvaloniaApplication1.Services;
-
-public record NavigateMessage(int PageId);
+﻿namespace AvaloniaApplication1.Services;
 
 public interface INavigationService
 {
+    event Action<int>? Navigated;
+
     bool CanGoBack { get; }
 
     void Navigate(int pageId);
@@ -13,9 +11,11 @@ public interface INavigationService
     void GoBack();
 }
 
-public class NavigationService(IMessenger messenger) : INavigationService
+public class NavigationService : INavigationService
 {
     private readonly Stack<int> _navigationStack = new();
+
+    public event Action<int>? Navigated;
 
     public bool CanGoBack => _navigationStack.Count > 1;
 
@@ -25,7 +25,7 @@ public class NavigationService(IMessenger messenger) : INavigationService
             return;
 
         _navigationStack.Push(pageId);
-        messenger.Send(new NavigateMessage(pageId));
+        Navigated?.Invoke(pageId);
     }
 
     public void GoBack()
@@ -33,6 +33,6 @@ public class NavigationService(IMessenger messenger) : INavigationService
         if (!CanGoBack) return;
 
         _navigationStack.Pop();
-        messenger.Send(new NavigateMessage(_navigationStack.Peek()));
+        Navigated?.Invoke(_navigationStack.Peek());
     }
 }

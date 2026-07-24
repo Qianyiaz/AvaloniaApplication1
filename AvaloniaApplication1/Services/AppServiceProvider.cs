@@ -1,32 +1,27 @@
-﻿using AvaloniaApplication1.ViewModels;
+﻿using Avalonia.Controls.Notifications;
+using AvaloniaApplication1.ViewModels;
 using AvaloniaApplication1.Views;
-using CommunityToolkit.Mvvm.Messaging;
 using Jab;
 
 namespace AvaloniaApplication1.Services;
 
 [ServiceProvider]
-[Singleton<MainWindow>(Factory = nameof(CreateWindowFactory))]
-[Singleton<MainWindowViewModel>]
+[Singleton<MainWindow>]
+[Transient<MainWindowViewModel>]
 [Transient<HomePageViewModel>]
 [Transient<SettingsPageViewModel>]
 [Singleton<INavigationService, NavigationService>]
-[Singleton<IMessenger>(Factory = nameof(CreateMessengerFactory))]
-[Singleton<PageViewModelFactory>(Factory = nameof(CreatePageFactory))]
+[Singleton<Func<int, object>>(Factory = nameof(CreatePageFactory))]
+[Singleton<INotificationManager>(Factory = nameof(CreateNotificationManager))]
 public partial class AppServiceProvider
 {
-    private MainWindow CreateWindowFactory() => new(GetService<IMessenger>())
-        { DataContext = GetService<MainWindowViewModel>() };
+    private WindowNotificationManager CreateNotificationManager() => new(GetService<MainWindow>()) { MaxItems = 3 };
 
-    private IMessenger CreateMessengerFactory() => WeakReferenceMessenger.Default;
-
-    private PageViewModelFactory CreatePageFactory() =>
+    private Func<int, object> CreatePageFactory() =>
         pageId => pageId switch
         {
             0 => GetService<HomePageViewModel>(),
             1 => GetService<SettingsPageViewModel>(),
-            _ => null
+            _ => throw new ArgumentOutOfRangeException(nameof(pageId))
         };
 }
-
-public delegate object? PageViewModelFactory(int pageId);

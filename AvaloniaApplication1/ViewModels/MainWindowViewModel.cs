@@ -1,7 +1,6 @@
 ﻿using AvaloniaApplication1.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using CommunityToolkit.Mvvm.Messaging;
 
 namespace AvaloniaApplication1.ViewModels;
 
@@ -9,16 +8,16 @@ public partial class MainWindowViewModel : ObservableObject
 {
     private readonly INavigationService _nav;
 
-    public MainWindowViewModel(PageViewModelFactory pf, INavigationService nav, IMessenger messenger)
+    public MainWindowViewModel(Func<int, object> pageFactory, INavigationService nav)
     {
         _nav = nav;
 
-        messenger.Register<NavigateMessage>(this, (_, message) =>
+        _nav.Navigated += id =>
         {
+            CurrentPage = pageFactory(id);
             IsCanGoBack = nav.CanGoBack;
-            CurrentPage = pf(message.PageId);
-            SetProperty(ref _selectedPageId, message.PageId, nameof(SelectedPageId));
-        });
+            SetProperty(ref _selectedPageId, id, nameof(SelectedPageId));
+        };
 
         _nav.Navigate(0);
     }
