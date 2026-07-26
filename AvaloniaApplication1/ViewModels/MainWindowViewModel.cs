@@ -8,14 +8,14 @@ public partial class MainWindowViewModel : ObservableObject
 {
     private readonly INavigationService _nav;
 
-    public MainWindowViewModel(Func<int, object> pageFactory, INavigationService nav)
+    public MainWindowViewModel(IPageViewModelFactory pageFactory, INavigationService nav)
     {
         _nav = nav;
 
         _nav.Navigated += id =>
         {
-            CurrentPage = pageFactory(id);
             IsCanGoBack = nav.CanGoBack;
+            CurrentPage = pageFactory.Create(id);
             SetProperty(ref _selectedPageId, id, nameof(SelectedPageId));
         };
 

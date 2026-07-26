@@ -1,10 +1,11 @@
 ﻿using Avalonia.Controls.Notifications;
+using AvaloniaApplication1.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
 namespace AvaloniaApplication1.ViewModels;
 
-public partial class HomePageViewModel(INotificationManager manager) : ObservableObject
+public partial class HomePageViewModel(INotificationService manager) : ObservableObject
 {
     [ObservableProperty] private string? _username;
 
