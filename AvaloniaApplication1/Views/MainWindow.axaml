@@ -16,7 +16,7 @@
     </Window.Resources>
 
     <Window.Styles>
-        <Style Selector="RadioButton">
+        <Style Selector="RadioButton.nav">
             <Setter Property="Padding" Value="22 8" />
             <Setter Property="CornerRadius" Value="40" />
 
@@ -82,10 +82,12 @@
                            FontSize="21" />
 
         <StackPanel Grid.Row="1" VerticalAlignment="Center" Spacing="15" Orientation="Horizontal">
-            <RadioButton Content="Home"
+            <RadioButton Classes="nav"
+                         Content="Home"
                          IsChecked="{Binding SelectedPageId, Converter={StaticResource RadioButtonCheckedConverter}, ConverterParameter=0}" />
 
-            <RadioButton Content="Settings"
+            <RadioButton Classes="nav"
+                         Content="Settings"
                          IsChecked="{Binding SelectedPageId, Converter={StaticResource RadioButtonCheckedConverter}, ConverterParameter=1}" />
         </StackPanel>
     </Grid>
