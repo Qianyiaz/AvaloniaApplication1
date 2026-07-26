@@ -3,13 +3,28 @@
              xmlns:vm="using:AvaloniaApplication1.ViewModels"
              x:DataType="vm:SettingsPageViewModel"
              x:Class="AvaloniaApplication1.Views.SettingsPage">
-    <ComboBox PlaceholderText="Set the App Theme."
-              SelectedValue="{Binding SelectedTheme}"
-              Theme="{StaticResource MaterialOutlineComboBox}">
-        <ComboBox.Items>
-            <x:String>Light</x:String>
-            <x:String>Dark</x:String>
-            <x:String>System</x:String>
-        </ComboBox.Items>
-    </ComboBox>
+
+    <UserControl.Styles>
+        <Style Selector="TextBlock.h1">
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+        </Style>
+    </UserControl.Styles>
+
+    <ScrollViewer>
+        <StackPanel Spacing="16" Margin="20">
+            <TextBlock Classes="h1" Text="Appearance" />
+            <StackPanel Spacing="4">
+                <TextBlock Text="Theme" />
+                <ComboBox SelectedValue="{Binding SelectedTheme}"
+                          Theme="{StaticResource MaterialOutlineComboBox}">
+                    <ComboBox.Items>
+                        <x:String>Light</x:String>
+                        <x:String>Dark</x:String>
+                        <x:String>System</x:String>
+                    </ComboBox.Items>
+                </ComboBox>
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
 </UserControl>
