@@ -1,0 +1,21 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:ui="using:Material.Styles.Controls"
+             xmlns:vm="using:AvaloniaApplication1.ViewModels"
+             xmlns:mia="using:Material.Icons.Avalonia"
+             x:Class="AvaloniaApplication1.Views.DownloadPage"
+             x:DataType="vm:DownloadPageViewModel">
+    <ScrollViewer>
+        <StackPanel Spacing="16" Margin="20">
+            <Expander Header="Lastest Version" IsExpanded="True">
+                <StackPanel Spacing="8" Margin="8">
+                    <ui:Card Content="{mia:MaterialIconTextExt Kind=CubeOutline,Text=1.21.1}" />
+                    <ui:Card Content="{mia:MaterialIconTextExt Kind=CubeOutline,Text=1.20.1}" />
+                    <ui:Card Content="{mia:MaterialIconTextExt Kind=CubeOutline,Text=1.19.4}" />
+                    <ui:Card Content="{mia:MaterialIconTextExt Kind=CubeOutline,Text=1.18.2}" />
+                    <ui:Card Content="{mia:MaterialIconTextExt Kind=CubeOutline,Text=1.12.2}" />
+                </StackPanel>
+            </Expander>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

@@ -8,7 +8,6 @@ namespace AvaloniaApplication1.Services;
 [Singleton<MainWindow>]
 [Transient<MainWindowViewModel>]
 [Transient<HomePageViewModel>]
-[Transient<SettingsPageViewModel>]
 [Singleton<INavigationService, NavigationService>]
 [Singleton<INotificationService, NotificationService>]
 [Singleton<IPageViewModelFactory>(Factory = nameof(CreatePageFactory))]
@@ -18,7 +17,8 @@ public partial class AppServiceProvider
         new PageViewModelFactory(pageId => pageId switch
         {
             0 => GetService<HomePageViewModel>(),
-            1 => GetService<SettingsPageViewModel>(),
+            1 => new DownloadPageViewModel(),
+            2 => new SettingsPageViewModel(),
             _ => throw new ArgumentOutOfRangeException(nameof(pageId))
         });
 }

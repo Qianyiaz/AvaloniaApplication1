@@ -16,8 +16,12 @@
     </Window.Resources>
 
     <Window.Styles>
+        <Style Selector="mia|MaterialIconText">
+            <Setter Property="IconSize" Value="20" />
+        </Style>
+
         <Style Selector="RadioButton.nav">
-            <Setter Property="Padding" Value="22 8" />
+            <Setter Property="Padding" Value="18 8" />
             <Setter Property="CornerRadius" Value="40" />
 
             <Setter Property="Template">
@@ -57,6 +61,9 @@
                 <DataTemplate DataType="vm:HomePageViewModel">
                     <views:HomePage />
                 </DataTemplate>
+                <DataTemplate DataType="vm:DownloadPageViewModel">
+                    <views:DownloadPage />
+                </DataTemplate>
                 <DataTemplate DataType="vm:SettingsPageViewModel">
                     <views:SettingsPage />
                 </DataTemplate>
@@ -83,12 +90,16 @@
 
         <StackPanel Grid.Row="1" VerticalAlignment="Center" Spacing="15" Orientation="Horizontal">
             <RadioButton Classes="nav"
-                         Content="Home"
+                         Content="{mia:MaterialIconTextExt Kind=Home,Text=Home}"
                          IsChecked="{Binding SelectedPageId, Converter={StaticResource RadioButtonCheckedConverter}, ConverterParameter=0}" />
 
             <RadioButton Classes="nav"
-                         Content="Settings"
+                         Content="{mia:MaterialIconTextExt Kind=Download,Text=Download}"
                          IsChecked="{Binding SelectedPageId, Converter={StaticResource RadioButtonCheckedConverter}, ConverterParameter=1}" />
+
+            <RadioButton Classes="nav"
+                         Content="{mia:MaterialIconTextExt Kind=Settings,Text=Settings}"
+                         IsChecked="{Binding SelectedPageId, Converter={StaticResource RadioButtonCheckedConverter}, ConverterParameter=2}" />
         </StackPanel>
     </Grid>
 </Window>
