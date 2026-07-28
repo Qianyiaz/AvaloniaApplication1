@@ -13,6 +13,6 @@ public partial class MainWindow : Window
     public MainWindow(MainWindowViewModel vm, INotificationService ns) : this()
     {
         DataContext = vm;
-        Loaded += (_, _) => ns.Initialize(GetTopLevel(this)!);
+        ns.Initialize(new(GetTopLevel(this)) { MaxItems = 4 });
     }
 }
