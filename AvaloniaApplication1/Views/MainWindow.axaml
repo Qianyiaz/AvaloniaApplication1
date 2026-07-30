@@ -1,0 +1,74 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:AvaloniaApplication1.ViewModels"
+        xmlns:dha="using:DialogHostAvalonia"
+        x:Class="AvaloniaApplication1.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Height="450" Width="800"
+        Title="ImpellerDownloader">
+    <dha:DialogHost Identifier="MainDialogHost">
+        <dha:DialogHost.DialogContent>
+            <StackPanel Spacing="15">
+                <ProgressBar Value="{Binding Progress}"
+                             ShowProgressText="True"
+                             ProgressTextFormat="Tasks Complete ({1:0}%)" />
+                
+                <!--
+                <Button Content="Close"
+                        Command="{Binding CloseCommand}"/>-->
+            </StackPanel>
+        </dha:DialogHost.DialogContent>
+        
+        <StackPanel MinWidth="350" Spacing="15" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Text="ImpellerDownloader" FontWeight="Bold" FontSize="35" />
+
+            <ComboBox SelectedValue="{Binding Platform}" PlaceholderText="Select Platform">
+                <ComboBox.Items>
+                    <x:String>linux-arm64</x:String>
+                    <x:String>linux-x64</x:String>
+                    <x:String>windows-arm64</x:String>
+                    <x:String>windows-x64</x:String>
+                    <x:String>darwin-arm64</x:String>
+                    <x:String>darwin-x64</x:String>
+                    <x:String>android-arm64</x:String>
+                </ComboBox.Items>
+            </ComboBox>
+
+            <TextBox Text="{Binding Hash}" PlaceholderText="Hash" IsEnabled="{Binding #HashCheckBox.IsChecked}" />
+
+            <Grid ColumnDefinitions="*,Auto">
+                <TextBox Text="{Binding FileName}"
+                         PlaceholderText="FileName.zip"
+                         ToolTip.Tip="{Binding SaveFolderPath,StringFormat='{}Saved Folder Path: {0}'}" />
+
+                <Button Grid.Column="1" Content="Select Saved Folder" Command="{Binding SelectFolderCommand}" />
+            </Grid>
+
+            <WrapPanel ItemSpacing="8">
+                <CheckBox Name="HashCheckBox" Content="Is use your chosen Hash Or use Lastest Hash?" />
+
+                <CheckBox IsChecked="{Binding IsUseMirror}" Content="Is use Mirror URL?" />
+            </WrapPanel>
+            
+            <!--<Grid ColumnDefinitions="*,Auto">
+                <Slider Value="{Binding ChunkCount,Mode=TwoWay}"
+                        TickFrequency="1"
+                        IsSnapToTickEnabled="True"
+                        TickPlacement="BottomRight"
+                        Maximum="128" Minimum="1"/>
+                
+                <TextBlock Grid.Column="1" Text="{Binding ChunkCount,StringFormat='{}Chunk Count: {0}'}"/>
+            </Grid>-->
+
+            <Button Content="Download"
+                    Command="{Binding DownloadCommand}">
+                <Button.IsEnabled>
+                    <MultiBinding Converter="{x:Static BoolConverters.And}">
+                        <Binding Path="Platform" Converter="{x:Static StringConverters.IsNotNullOrEmpty}" />
+                        <Binding Path="SaveFolderPath" Converter="{x:Static StringConverters.IsNotNullOrEmpty}" />
+                    </MultiBinding>
+                </Button.IsEnabled>
+            </Button>
+        </StackPanel>
+    </dha:DialogHost>
+</Window>
