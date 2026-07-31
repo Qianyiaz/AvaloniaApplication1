@@ -27,7 +27,7 @@
                  PasswordChar="*"
                  Classes="outline" />
 
-        <Button Content="Login"
+        <Button Content="{Binding Content}"
                 Classes="accent"
                 Height="40"
                 Command="{Binding LoginCommand}"
