@@ -8,8 +8,9 @@
         x:Class="AvaloniaApplication1.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         TransparencyLevelHint="Mica,AcrylicBlur,None"
-        Background="Transparent"
-        Title="AvaloniaApplication1">
+        Icon="..\Assets\avalonia-logo.ico"
+        Title="AvaloniaApplication1"
+        Background="Transparent">
 
     <Window.Resources>
         <cvt:RadioButtonCheckedConverter x:Key="RadioButtonCheckedConverter" />
