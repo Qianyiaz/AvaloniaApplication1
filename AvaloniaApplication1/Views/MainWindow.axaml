@@ -21,21 +21,8 @@
         </Style>
 
         <Style Selector="RadioButton.nav">
-            <Setter Property="Padding" Value="18 8" />
-            <Setter Property="CornerRadius" Value="40" />
-
-            <Setter Property="Template">
-                <ControlTemplate TargetType="RadioButton">
-                    <ToggleButton Padding="{TemplateBinding Padding}"
-                                  Content="{TemplateBinding Content}"
-                                  CornerRadius="{TemplateBinding CornerRadius}"
-                                  IsChecked="{TemplateBinding IsChecked, Mode=TwoWay}" />
-                </ControlTemplate>
-            </Setter>
-
-            <Style Selector="^:checked">
-                <Setter Property="IsHitTestVisible" Value="False" />
-            </Style>
+            <Setter Property="Padding" Value="25 12" />
+            <Setter Property="Theme" Value="{StaticResource MaterialButtonlikeRadioButton}"/>
         </Style>
 
         <Style Selector="Window">
@@ -88,7 +75,7 @@
                            HorizontalAlignment="Right"
                            FontSize="21" />
 
-        <StackPanel Grid.Row="1" VerticalAlignment="Center" Spacing="15" Orientation="Horizontal">
+        <StackPanel Grid.Row="1" VerticalAlignment="Center" Orientation="Horizontal">
             <RadioButton Classes="nav"
                          Content="{mia:MaterialIconTextExt Kind=Home,Text=Home}"
                          IsChecked="{Binding SelectedPageId, Converter={StaticResource RadioButtonCheckedConverter}, ConverterParameter=0}" />
