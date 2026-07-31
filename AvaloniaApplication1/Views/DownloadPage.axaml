@@ -5,20 +5,15 @@
              x:Class="AvaloniaApplication1.Views.DownloadPage"
              x:DataType="vm:DownloadPageViewModel">
     <ScrollViewer>
-        <StackPanel Spacing="16" Margin="20">
+        <StackPanel Spacing="8" Margin="15">
             <Expander Header="Latest Version" IsExpanded="True">
                 <ItemsControl ItemsSource="{Binding LatestVersions}">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <StackPanel Spacing="8" Margin="8" />
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate x:DataType="x:String">
-                            <RadioButton GroupName="item" 
-                                         Padding="15" 
+                            <RadioButton GroupName="item"
+                                         Padding="15"
                                          Theme="{StaticResource MaterialButtonlikeRadioButton}"
-                                         Content="{mia:MaterialIconTextExt Kind=CubeOutline,Text='{Binding }'}"/>
+                                         Content="{mia:MaterialIconTextExt Kind=CubeOutline,Text='{Binding }'}" />
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>

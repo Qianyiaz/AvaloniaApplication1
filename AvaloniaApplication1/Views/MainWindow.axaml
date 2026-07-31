@@ -22,7 +22,7 @@
 
         <Style Selector="RadioButton.nav">
             <Setter Property="Padding" Value="25 12" />
-            <Setter Property="Theme" Value="{StaticResource MaterialButtonlikeRadioButton}"/>
+            <Setter Property="Theme" Value="{StaticResource MaterialButtonlikeRadioButton}" />
         </Style>
 
         <Style Selector="Window">
