@@ -11,7 +11,8 @@ public partial class SettingsPageViewModel : ObservableObject
 
     [ObservableProperty] private string _selectedTheme =
         Application.Current!.RequestedThemeVariant == ThemeVariant.Default
-            ? "System" : Application.Current.RequestedThemeVariant!.Key.ToString()!;
+            ? "System"
+            : Application.Current.RequestedThemeVariant!.Key.ToString()!;
 
     partial void OnSelectedThemeChanged(string value) => Application.Current!.RequestedThemeVariant = value switch
     {
