@@ -1,30 +1,19 @@
 ﻿<UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:vm="using:AvaloniaApplication1.ViewModels"
+             xmlns:p1="using:Material.Styles.Assists"
              x:DataType="vm:SettingsPageViewModel"
              x:Class="AvaloniaApplication1.Views.SettingsPage">
-
-    <UserControl.Styles>
-        <Style Selector="TextBlock.h1">
-            <Setter Property="FontSize" Value="18" />
-            <Setter Property="FontWeight" Value="SemiBold" />
-        </Style>
-    </UserControl.Styles>
-
     <ScrollViewer>
-        <StackPanel Spacing="16" Margin="20">
-            <TextBlock Classes="h1" Text="Appearance" />
-            <StackPanel Spacing="4">
-                <TextBlock Text="Theme" />
-                <ComboBox SelectedValue="{Binding SelectedTheme}"
-                          Theme="{StaticResource MaterialOutlineComboBox}">
-                    <ComboBox.Items>
-                        <x:String>Light</x:String>
-                        <x:String>Dark</x:String>
-                        <x:String>System</x:String>
-                    </ComboBox.Items>
-                </ComboBox>
-            </StackPanel>
+        <StackPanel Spacing="8">
+            <Expander Header="Appearance" IsExpanded="True">
+                <ComboBox Margin="15"
+                          ToolTip.Tip="Select application theme"
+                          ItemsSource="{Binding ThemeOptions}"
+                          SelectedValue="{Binding SelectedTheme}"
+                          p1:ComboBoxAssist.Label="Current Theme"
+                          Theme="{StaticResource MaterialOutlineComboBox}" />
+            </Expander>
         </StackPanel>
     </ScrollViewer>
 </UserControl>

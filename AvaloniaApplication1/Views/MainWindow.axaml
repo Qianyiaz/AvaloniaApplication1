@@ -16,15 +16,6 @@
     </Window.Resources>
 
     <Window.Styles>
-        <Style Selector="mia|MaterialIconText">
-            <Setter Property="IconSize" Value="20" />
-        </Style>
-
-        <Style Selector="RadioButton.nav">
-            <Setter Property="Padding" Value="25 12" />
-            <Setter Property="Theme" Value="{StaticResource MaterialButtonlikeRadioButton}" />
-        </Style>
-
         <Style Selector="Window">
             <Setter Property="Opacity" Value="0" />
             <Setter Property="RenderTransform" Value="translate(150px,0px) scale(0.85)" />
@@ -43,7 +34,7 @@
     </Window.Styles>
 
     <Grid Margin="15 10" RowDefinitions="*,Auto">
-        <TransitioningContentControl Margin=" 0 0 0 8" Content="{Binding CurrentPage}">
+        <TransitioningContentControl Content="{Binding CurrentPage}">
             <TransitioningContentControl.DataTemplates>
                 <DataTemplate DataType="vm:HomePageViewModel">
                     <views:HomePage />
@@ -69,24 +60,44 @@
         </TransitioningContentControl>
 
         <ui:FloatingButton Grid.Row="1"
+                           Classes="Accent"
+                           ToolTip.Tip="Back"
                            IsEnabled="{Binding IsCanGoBack}"
                            Command="{Binding GoBackCommand}"
-                           Content="{mia:MaterialIconExt Kind=ArrowBack}"
-                           HorizontalAlignment="Right"
-                           FontSize="21" />
+                           Content="{mia:MaterialIconExt Kind=ArrowBack,IconSize=24}"
+                           HorizontalAlignment="Right" />
 
-        <StackPanel Grid.Row="1" VerticalAlignment="Center" Orientation="Horizontal">
-            <RadioButton Classes="nav"
-                         Content="{mia:MaterialIconTextExt Kind=Home,Text=Home}"
-                         IsChecked="{Binding SelectedPageId, Converter={StaticResource RadioButtonCheckedConverter}, ConverterParameter=0}" />
+        <ui:Card Grid.Row="1"
+                 Padding="0"
+                 HorizontalAlignment="Left"
+                 VerticalAlignment="Center"
+                 InsideClipping="True">
+            <ui:Card.Styles>
+                <Style Selector="RadioButton">
+                    <Setter Property="Padding" Value="25 12" />
+                    <Setter Property="Theme" Value="{StaticResource MaterialButtonlikeRadioButton}" />
+                </Style>
 
-            <RadioButton Classes="nav"
-                         Content="{mia:MaterialIconTextExt Kind=Download,Text=Download}"
-                         IsChecked="{Binding SelectedPageId, Converter={StaticResource RadioButtonCheckedConverter}, ConverterParameter=1}" />
+                <Style Selector="mia|MaterialIconText">
+                    <Setter Property="IconSize" Value="20" />
+                </Style>
+            </ui:Card.Styles>
+            <StackPanel Orientation="Horizontal">
+                <RadioButton Classes="accent"
+                             ToolTip.Tip="Home"
+                             Content="{mia:MaterialIconTextExt Kind=Home,Text=Home}"
+                             IsChecked="{Binding SelectedPageId, Converter={StaticResource RadioButtonCheckedConverter}, ConverterParameter=0}" />
 
-            <RadioButton Classes="nav"
-                         Content="{mia:MaterialIconTextExt Kind=Settings,Text=Settings}"
-                         IsChecked="{Binding SelectedPageId, Converter={StaticResource RadioButtonCheckedConverter}, ConverterParameter=2}" />
-        </StackPanel>
+                <RadioButton Classes="accent"
+                             ToolTip.Tip="Download"
+                             Content="{mia:MaterialIconTextExt Kind=Download,Text=Download}"
+                             IsChecked="{Binding SelectedPageId, Converter={StaticResource RadioButtonCheckedConverter}, ConverterParameter=1}" />
+
+                <RadioButton Classes="accent"
+                             ToolTip.Tip="Settings"
+                             Content="{mia:MaterialIconTextExt Kind=Settings,Text=Settings}"
+                             IsChecked="{Binding SelectedPageId, Converter={StaticResource RadioButtonCheckedConverter}, ConverterParameter=2}" />
+            </StackPanel>
+        </ui:Card>
     </Grid>
 </Window>

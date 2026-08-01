@@ -1,13 +1,13 @@
 ﻿<UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:vm="using:AvaloniaApplication1.ViewModels"
+             xmlns:p1="using:Material.Styles.Assists"
              x:Class="AvaloniaApplication1.Views.HomePage"
              x:DataType="vm:HomePageViewModel">
     <StackPanel HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 Spacing="16"
-                Margin="30"
-                Width="400">
+                MinWidth="450">
         <TextBlock Text="Welcome HERE BACK!"
                    FontSize="28"
                    FontWeight="Bold"
@@ -18,20 +18,25 @@
                    Opacity="0.7"
                    FontWeight="Light" />
 
-        <TextBox PlaceholderText="Username"
+        <TextBox UseFloatingPlaceholder="True"
+                 p1:TextFieldAssist.Label="Username"
                  Text="{Binding Username}"
-                 Classes="outline" />
+                 Classes="outline clearButton"
+                 ToolTip.Tip="Enter your username" />
 
-        <TextBox PlaceholderText="Password"
+        <TextBox PasswordChar="*"
+                 UseFloatingPlaceholder="True"
+                 p1:TextFieldAssist.Label="Password"
                  Text="{Binding Password}"
-                 PasswordChar="*"
-                 Classes="outline" />
+                 Classes="outline revealPasswordButton"
+                 ToolTip.Tip="Enter your password" />
 
         <Button Content="Login"
                 Classes="accent"
                 Height="40"
                 Command="{Binding LoginCommand}"
-                Margin="0 8 0 0">
+                Margin="0 8 0 0"
+                ToolTip.Tip="Click to sign in">
             <Button.IsEnabled>
                 <MultiBinding Converter="{x:Static BoolConverters.And}">
                     <Binding Path="Username" Converter="{x:Static StringConverters.IsNotNullOrEmpty}" />
@@ -42,6 +47,7 @@
 
         <HyperlinkButton HorizontalAlignment="Right"
                          Content="Don't have an account? Register Now!"
-                         NavigateUri="https://www.bilibili.com/video/BV1GJ411x7h7" />
+                         NavigateUri="https://www.bilibili.com/video/BV1GJ411x7h7"
+                         ToolTip.Tip="Go to registration page" />
     </StackPanel>
 </UserControl>
