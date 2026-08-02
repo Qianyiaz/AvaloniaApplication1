@@ -7,18 +7,17 @@
     <ScrollViewer>
         <StackPanel Spacing="8">
             <Expander Header="Versions" IsExpanded="True">
-                <ItemsControl ItemsSource="{Binding LatestVersions}">
-                    <ItemsControl.ItemTemplate>
+                <ListBox ItemsSource="{Binding LatestVersions}" SelectedItem="{Binding SelectedVersion}">
+                    <ListBox.ItemTemplate>
                         <DataTemplate x:DataType="x:String">
-                            <RadioButton GroupName="item"
-                                         Classes="accent"
-                                         Padding="15"
-                                         ToolTip.Tip="{Binding StringFormat='{}Version: {0}'}"
-                                         Theme="{StaticResource MaterialButtonlikeRadioButton}"
-                                         Content="{mia:MaterialIconTextExt Kind=CubeOutline,Text='{Binding }'}" />
+                            <mia:MaterialIconText Margin="8" 
+                                                  IconSize="21"
+                                                  Kind="CubeOutline"
+                                                  Text="{Binding}"
+                                                  ToolTip.Tip="{Binding StringFormat='{}Version: {0}'}"/>
                         </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
+                    </ListBox.ItemTemplate>
+                </ListBox>
             </Expander>
         </StackPanel>
     </ScrollViewer>
