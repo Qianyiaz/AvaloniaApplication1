@@ -5,7 +5,7 @@ using CommunityToolkit.Mvvm.Input;
 
 namespace AvaloniaApplication1.ViewModels;
 
-public partial class HomePageViewModel(INotificationService manager) : ObservableObject
+public partial class HomePageViewModel(INotificationService notification) : ObservableObject
 {
     [ObservableProperty] private string? _username;
 
@@ -13,6 +13,6 @@ public partial class HomePageViewModel(INotificationService manager) : Observabl
 
     [RelayCommand]
     private void Login() =>
-        manager.Show(new Notification($"Welcome {Username}!",
+        notification.Show(new Notification($"Welcome {Username}!",
             $"Wait a Minute! I am a HACKER.\nI know YOUR NAME is: {Username}🤣🤣🤣, PASSWORD is {Password}.😂😂😂"));
 }
