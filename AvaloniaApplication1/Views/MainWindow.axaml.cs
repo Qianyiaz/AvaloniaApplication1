@@ -10,9 +10,9 @@ public partial class MainWindow : Window
     public MainWindow() => InitializeComponent();
 
     // ReSharper disable once UnusedMember.Global
-    public MainWindow(MainWindowViewModel vm, INotificationService ns) : this()
+    public MainWindow(MainWindowViewModel vm, INotificationService notification) : this()
     {
         DataContext = vm;
-        ns.Initialize(new(GetTopLevel(this)) { MaxItems = 4 });
+        notification.Initialize(new(GetTopLevel(this)) { MaxItems = 4 });
     }
 }

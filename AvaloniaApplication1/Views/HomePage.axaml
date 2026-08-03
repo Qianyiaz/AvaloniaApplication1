@@ -6,17 +6,14 @@
              x:DataType="vm:HomePageViewModel">
     <StackPanel HorizontalAlignment="Center"
                 VerticalAlignment="Center"
-                Spacing="16"
-                MinWidth="450">
+                Spacing="12"
+                MinWidth="480">
         <TextBlock Text="Welcome HERE BACK!"
-                   FontSize="28"
-                   FontWeight="Bold"
-                   Foreground="{DynamicResource MaterialPrimaryForegroundBrush}" />
+                   FontSize="32"
+                   FontWeight="Bold" />
 
         <TextBlock Text="Please Login or Register to continue."
-                   FontSize="14"
-                   Opacity="0.7"
-                   FontWeight="Light" />
+                   FontSize="14" />
 
         <TextBox UseFloatingPlaceholder="True"
                  p1:TextFieldAssist.Label="Username"
@@ -32,10 +29,9 @@
                  ToolTip.Tip="Enter your password" />
 
         <Button Content="Login"
+                Padding="0 14"
                 Classes="accent"
-                Height="40"
                 Command="{Binding LoginCommand}"
-                Margin="0 8 0 0"
                 ToolTip.Tip="Click to sign in">
             <Button.IsEnabled>
                 <MultiBinding Converter="{x:Static BoolConverters.And}">

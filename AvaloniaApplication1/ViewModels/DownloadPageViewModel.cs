@@ -19,6 +19,6 @@ public partial class DownloadPageViewModel(INotificationService notification) : 
 
     [ObservableProperty] private string? _selectedVersion;
 
-    partial void OnSelectedVersionChanged(string? value) => 
+    partial void OnSelectedVersionChanged(string? value) =>
         notification.Show(new Notification($"You selected version {value}!", "This is a simple notification."));
 }

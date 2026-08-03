@@ -10,11 +10,11 @@
                 <ListBox ItemsSource="{Binding LatestVersions}" SelectedItem="{Binding SelectedVersion}">
                     <ListBox.ItemTemplate>
                         <DataTemplate x:DataType="x:String">
-                            <mia:MaterialIconText Margin="8" 
+                            <mia:MaterialIconText Margin="8"
                                                   IconSize="21"
                                                   Kind="CubeOutline"
                                                   Text="{Binding}"
-                                                  ToolTip.Tip="{Binding StringFormat='{}Version: {0}'}"/>
+                                                  ToolTip.Tip="{Binding StringFormat='{}Version: {0}'}" />
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>

@@ -21,16 +21,13 @@ public class NavigationService : INavigationService
 
     public void Navigate(int pageId)
     {
-        if (_navigationStack.Count > 0 && _navigationStack.Peek() == pageId)
-            return;
-
         _navigationStack.Push(pageId);
         Navigated?.Invoke(pageId);
     }
 
     public void GoBack()
     {
-        if (!CanGoBack) return;
+        if (!CanGoBack) throw new InvalidOperationException("Cannot go back.");
 
         _navigationStack.Pop();
         Navigated?.Invoke(_navigationStack.Peek());
