@@ -46,6 +46,9 @@
                 <DataTemplate DataType="vm:DownloadPageViewModel">
                     <views:DownloadPage />
                 </DataTemplate>
+                <DataTemplate DataType="vm:CardsPageViewModel">
+                    <views:CardsPage />
+                </DataTemplate>
                 <DataTemplate DataType="vm:SettingsPageViewModel">
                     <views:SettingsPage />
                 </DataTemplate>
@@ -63,14 +66,6 @@
             </TransitioningContentControl.PageTransition>
         </TransitioningContentControl>
 
-        <ui:FloatingButton Grid.Row="1"
-                           Classes="Accent"
-                           ToolTip.Tip="Back"
-                           IsEnabled="{Binding IsCanGoBack}"
-                           Command="{Binding GoBackCommand}"
-                           Content="{mia:MaterialIconExt Kind=ArrowBack,IconSize=24}"
-                           HorizontalAlignment="Right" />
-
         <ui:Card Grid.Row="1"
                  Padding="0"
                  HorizontalAlignment="Left"
@@ -78,7 +73,7 @@
                  InsideClipping="True">
             <ui:Card.Styles>
                 <Style Selector="RadioButton">
-                    <Setter Property="Padding" Value="25 12" />
+                    <Setter Property="Padding" Value="21 12" />
                     <Setter Property="Theme" Value="{StaticResource MaterialButtonlikeRadioButton}" />
                 </Style>
 
@@ -98,10 +93,23 @@
                              IsChecked="{Binding SelectedPageId, Converter={StaticResource RadioButtonCheckedConverter}, ConverterParameter=1}" />
 
                 <RadioButton Classes="accent"
+                             ToolTip.Tip="Card"
+                             Content="{mia:MaterialIconTextExt Kind=CardMultiple,Text=Cards}"
+                             IsChecked="{Binding SelectedPageId, Converter={StaticResource RadioButtonCheckedConverter}, ConverterParameter=2}" />
+
+                <RadioButton Classes="accent"
                              ToolTip.Tip="Settings"
                              Content="{mia:MaterialIconTextExt Kind=Settings,Text=Settings}"
-                             IsChecked="{Binding SelectedPageId, Converter={StaticResource RadioButtonCheckedConverter}, ConverterParameter=2}" />
+                             IsChecked="{Binding SelectedPageId, Converter={StaticResource RadioButtonCheckedConverter}, ConverterParameter=3}" />
             </StackPanel>
         </ui:Card>
+
+        <ui:FloatingButton Grid.Row="1"
+                           Classes="Accent"
+                           ToolTip.Tip="Back"
+                           IsEnabled="{Binding IsCanGoBack}"
+                           Command="{Binding GoBackCommand}"
+                           Content="{mia:MaterialIconExt Kind=ArrowBack,IconSize=24}"
+                           HorizontalAlignment="Right" />
     </Grid>
 </Window>
