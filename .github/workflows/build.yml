@@ -2,10 +2,12 @@ name: build
 permissions:
   contents: read
 on:
+  pull_request: 
+    branches: [ main ]
+    paths: [ 'AvaloniaApplication1/**', '.github/workflows/build.yml' ]
   push:
-    branches:
-      - main
-    paths: [ 'AvaloniaApplication1/**', '**/build.yml' ]
+    branches: [ main ]
+    paths: [ 'AvaloniaApplication1/**', '.github/workflows/build.yml' ]
 jobs:
   publish:
     strategy:
