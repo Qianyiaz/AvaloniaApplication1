@@ -1,0 +1,15 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:ui="using:Material.Styles.Controls"
+             x:Class="AvaloniaApplication1.Views.CardsPage">
+    <Grid RowSpacing="8" RowDefinitions="*,*">
+        <Grid Grid.Row="0" ColumnSpacing="8" ColumnDefinitions="3*,5*">
+            <ui:Card Background="Red" Grid.Column="0" />
+            <ui:Card Background="Green" Grid.Column="1" />
+        </Grid>
+        <Grid Grid.Row="1" ColumnSpacing="8" ColumnDefinitions="5*,3*">
+            <ui:Card Background="Blue" Grid.Column="0" />
+            <ui:Card Background="Yellow" Grid.Column="1" />
+        </Grid>
+    </Grid>
+</UserControl>
