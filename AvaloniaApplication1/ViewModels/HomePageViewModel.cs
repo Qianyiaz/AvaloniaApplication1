@@ -7,9 +7,9 @@ namespace AvaloniaApplication1.ViewModels;
 
 public partial class HomePageViewModel(INotificationService notification) : ObservableObject
 {
-    [ObservableProperty] private string? _username;
-
     [ObservableProperty] private string? _password;
+
+    [ObservableProperty] private string? _username;
 
     [RelayCommand]
     private void Login() =>

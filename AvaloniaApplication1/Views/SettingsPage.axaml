@@ -4,16 +4,14 @@
              xmlns:p1="using:Material.Styles.Assists"
              x:DataType="vm:SettingsPageViewModel"
              x:Class="AvaloniaApplication1.Views.SettingsPage">
-    <ScrollViewer>
-        <StackPanel Spacing="8">
-            <Expander Header="Appearance" IsExpanded="True">
-                <ComboBox Margin="15"
-                          ToolTip.Tip="Select application theme"
-                          ItemsSource="{Binding ThemeOptions}"
-                          SelectedValue="{Binding SelectedTheme}"
-                          p1:ComboBoxAssist.Label="Current Theme"
-                          Theme="{StaticResource MaterialOutlineComboBox}" />
-            </Expander>
-        </StackPanel>
-    </ScrollViewer>
+    <StackPanel Spacing="8">
+        <Expander Header="Appearance" IsExpanded="True">
+            <ComboBox Margin="15"
+                      ToolTip.Tip="Select application theme"
+                      ItemsSource="{Binding ThemeOptions}"
+                      SelectedValue="{Binding SelectedTheme}"
+                      p1:ComboBoxAssist.Label="Current Theme"
+                      Theme="{StaticResource MaterialOutlineComboBox}" />
+        </Expander>
+    </StackPanel>
 </UserControl>

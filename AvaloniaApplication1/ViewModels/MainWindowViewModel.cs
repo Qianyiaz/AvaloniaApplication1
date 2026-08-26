@@ -8,6 +8,12 @@ public partial class MainWindowViewModel : ObservableObject
 {
     private readonly INavigationService _navigation;
 
+    [ObservableProperty] private object? _currentPage;
+
+    [ObservableProperty] private bool _isCanGoBack;
+
+    [ObservableProperty] private int _selectedPageId;
+
     public MainWindowViewModel(PageViewModelFactory pageFactory, INavigationService navigation)
     {
         _navigation = navigation;
@@ -22,13 +28,7 @@ public partial class MainWindowViewModel : ObservableObject
         _navigation.Navigate(0);
     }
 
-    [ObservableProperty] private object? _currentPage;
-
-    [ObservableProperty] private int _selectedPageId;
-
     partial void OnSelectedPageIdChanged(int value) => _navigation.Navigate(value);
-
-    [ObservableProperty] private bool _isCanGoBack;
 
     [RelayCommand]
     private void GoBack() => _navigation.GoBack();

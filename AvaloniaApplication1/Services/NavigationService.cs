@@ -2,9 +2,9 @@
 
 public interface INavigationService
 {
-    event Action<int>? Navigated;
-
     bool CanGoBack { get; }
+
+    event Action<int>? Navigated;
 
     void Navigate(int pageId);
 

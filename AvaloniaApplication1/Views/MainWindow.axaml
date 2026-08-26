@@ -26,6 +26,7 @@
                         <Setter Property="ScaleTransform.ScaleY" Value="0.8" />
                         <Setter Property="TranslateTransform.Y" Value="150" />
                     </KeyFrame>
+
                     <KeyFrame Cue="100%">
                         <Setter Property="Opacity" Value="1" />
                         <Setter Property="ScaleTransform.ScaleX" Value="1" />
@@ -37,51 +38,16 @@
         </Style>
     </Window.Styles>
 
-    <Grid Margin="15 10" RowDefinitions="*,Auto">
-        <TransitioningContentControl Content="{Binding CurrentPage}">
-            <TransitioningContentControl.DataTemplates>
-                <DataTemplate DataType="vm:HomePageViewModel">
-                    <views:HomePage />
-                </DataTemplate>
-                <DataTemplate DataType="vm:DownloadPageViewModel">
-                    <views:DownloadPage />
-                </DataTemplate>
-                <DataTemplate DataType="vm:CardsPageViewModel">
-                    <views:CardsPage />
-                </DataTemplate>
-                <DataTemplate DataType="vm:SettingsPageViewModel">
-                    <views:SettingsPage />
-                </DataTemplate>
-            </TransitioningContentControl.DataTemplates>
-            <TransitioningContentControl.PageTransition>
-                <CompositePageTransition>
-                    <PageSlide Duration="0:00:00.4"
-                               Orientation="Horizontal"
-                               SlideInEasing="CubicEaseOut"
-                               SlideOutEasing="CubicEaseIn" />
-                    <CrossFade Duration="0:00:00.25"
-                               FadeInEasing="SineEaseOut"
-                               FadeOutEasing="SineEaseIn" />
-                </CompositePageTransition>
-            </TransitioningContentControl.PageTransition>
-        </TransitioningContentControl>
-
-        <ui:Card Grid.Row="1"
-                 Padding="0"
-                 HorizontalAlignment="Left"
-                 VerticalAlignment="Center"
-                 InsideClipping="True">
-            <ui:Card.Styles>
-                <Style Selector="RadioButton">
-                    <Setter Property="Padding" Value="21 12" />
-                    <Setter Property="Theme" Value="{StaticResource MaterialButtonlikeRadioButton}" />
+    <DockPanel VerticalSpacing="5" Margin="10 8">
+        <Grid DockPanel.Dock="Bottom" ColumnDefinitions="*,Auto">
+            <Grid.Styles>
+                <Style Selector=":is(mia|MaterialIcon)">
+                    <Setter Property="IconSize" Value="24" />
                 </Style>
-
-                <Style Selector="mia|MaterialIconText">
-                    <Setter Property="IconSize" Value="20" />
-                </Style>
-            </ui:Card.Styles>
-            <StackPanel Orientation="Horizontal">
+            </Grid.Styles>
+            <WrapPanel ItemSpacing="8"
+                       LineSpacing="8"
+                       VerticalAlignment="Center">
                 <RadioButton Classes="accent"
                              ToolTip.Tip="Home"
                              Content="{mia:MaterialIconTextExt Kind=Home,Text=Home}"
@@ -101,15 +67,49 @@
                              ToolTip.Tip="Settings"
                              Content="{mia:MaterialIconTextExt Kind=Settings,Text=Settings}"
                              IsChecked="{Binding SelectedPageId, Converter={StaticResource RadioButtonCheckedConverter}, ConverterParameter=3}" />
-            </StackPanel>
-        </ui:Card>
+            </WrapPanel>
 
-        <ui:FloatingButton Grid.Row="1"
-                           Classes="Accent"
-                           ToolTip.Tip="Back"
-                           IsEnabled="{Binding IsCanGoBack}"
-                           Command="{Binding GoBackCommand}"
-                           Content="{mia:MaterialIconExt Kind=ArrowBack,IconSize=24}"
-                           HorizontalAlignment="Right" />
-    </Grid>
+            <ui:FloatingButton Grid.Column="1"
+                               Classes="Accent"
+                               ToolTip.Tip="Back"
+                               HorizontalAlignment="Right"
+                               IsEnabled="{Binding IsCanGoBack}"
+                               Command="{Binding GoBackCommand}"
+                               Content="{mia:MaterialIconExt Kind=ArrowBack}" />
+        </Grid>
+
+        <ScrollViewer>
+            <TransitioningContentControl Content="{Binding CurrentPage}">
+                <TransitioningContentControl.DataTemplates>
+                    <DataTemplate DataType="vm:HomePageViewModel">
+                        <views:HomePage />
+                    </DataTemplate>
+
+                    <DataTemplate DataType="vm:DownloadPageViewModel">
+                        <views:DownloadPage />
+                    </DataTemplate>
+
+                    <DataTemplate DataType="vm:CardsPageViewModel">
+                        <views:CardsPage />
+                    </DataTemplate>
+
+                    <DataTemplate DataType="vm:SettingsPageViewModel">
+                        <views:SettingsPage />
+                    </DataTemplate>
+                </TransitioningContentControl.DataTemplates>
+                <TransitioningContentControl.PageTransition>
+                    <CompositePageTransition>
+                        <PageSlide Duration="0:00:00.4"
+                                   Orientation="Horizontal"
+                                   SlideInEasing="CubicEaseOut"
+                                   SlideOutEasing="CubicEaseIn" />
+
+                        <CrossFade Duration="0:00:00.25"
+                                   FadeInEasing="SineEaseOut"
+                                   FadeOutEasing="SineEaseIn" />
+                    </CompositePageTransition>
+                </TransitioningContentControl.PageTransition>
+            </TransitioningContentControl>
+        </ScrollViewer>
+    </DockPanel>
 </Window>

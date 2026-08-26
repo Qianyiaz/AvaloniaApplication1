@@ -4,16 +4,18 @@
              xmlns:p1="using:Material.Styles.Assists"
              x:Class="AvaloniaApplication1.Views.HomePage"
              x:DataType="vm:HomePageViewModel">
-    <StackPanel HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                Spacing="12"
-                MinWidth="480">
-        <TextBlock Text="Welcome HERE BACK!"
-                   FontSize="32"
-                   FontWeight="Bold" />
+    <StackPanel Spacing="12"
+                Margin="45 0"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Center">
+        <TextBlock FontSize="32"
+                   FontWeight="Bold"
+                   Text="Welcome HERE BACK!"
+                   TextWrapping="WrapWithOverflow" />
 
-        <TextBlock Text="Please Login or Register to continue."
-                   FontSize="14" />
+        <TextBlock FontSize="14"
+                   Text="Please Login or Register to continue."
+                   TextWrapping="WrapWithOverflow" />
 
         <TextBox UseFloatingPlaceholder="True"
                  p1:TextFieldAssist.Label="Username"
